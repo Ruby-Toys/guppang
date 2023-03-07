@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guppang?serverTimezone=Asia/Seoul
+    username: test
+    password: test
+
+mybatis:
+  mapper-locations: mybatis/mapper/**/*.xml
