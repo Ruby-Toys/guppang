@@ -1,13 +1,15 @@
 package ruby.guppang.worker;
 
-import ruby.guppang.worker.dto.MemberInfo;
-import ruby.guppang.worker.dto.MemberSignUp;
-import ruby.guppang.worker.dto.MemberUpdate;
+import ruby.guppang.worker.dto.WorkerInfo;
+import ruby.guppang.worker.dto.WorkerLogin;
+import ruby.guppang.worker.dto.WorkerSignUp;
+import ruby.guppang.worker.dto.WorkerUpdate;
 
 public interface WorkerService {
 
-    void signUp(MemberSignUp memberSignUp);
-    void update(MemberUpdate memberUpdate);
+    void signUp(WorkerSignUp workerSignUp);
+    WorkerInfo login(WorkerLogin workerLogin);
+    void update(WorkerUpdate workerUpdate);
     void delete(Long id);
-    MemberInfo getInfo(Long id);
+    WorkerInfo getInfo(Long id);
 }

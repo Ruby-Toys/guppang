@@ -1,11 +1,12 @@
 package ruby.guppang.worker;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ruby.guppang.worker.dto.MemberSignUp;
+import org.springframework.web.bind.annotation.*;
+import ruby.guppang.worker.dto.WorkerSignUp;
+import ruby.guppang.worker.enums.WorkPlaceMapper;
+import ruby.guppang.worker.enums.WorkPlaces;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,9 +14,15 @@ import ruby.guppang.worker.dto.MemberSignUp;
 public class WorkerController {
 
     private final WorkerService workerService;
+    private final WorkPlaces workPlaces;
 
-    @PostMapping
-    void signUp(@RequestBody MemberSignUp memberSignUp) {
-        workerService.signUp(memberSignUp);
+    @PostMapping("/signUp")
+    public void signUp(@RequestBody WorkerSignUp workerSignUp) {
+        workerService.signUp(workerSignUp);
+    }
+
+    @GetMapping("/workplaces")
+    public List<WorkPlaceMapper> getWorkPlaceValue() {
+        return workPlaces.getWorkPlaceMappers();
     }
 }
