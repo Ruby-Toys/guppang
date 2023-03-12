@@ -1,4 +1,4 @@
-package ruby.guppang.worker.enums;
+package ruby.guppang.workRecord.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,5 +10,5 @@ public enum WorkPlace {
     SUWON_CENTER("수원 센터"),
     GWANGJU_CENTER("광주 센터");
 
-    String place;
+    final String place;
 }

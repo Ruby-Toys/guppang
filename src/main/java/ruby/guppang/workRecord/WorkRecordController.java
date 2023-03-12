@@ -1,17 +1,41 @@
 package ruby.guppang.workRecord;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ruby.guppang.security.AuthenticationWorker;
+import ruby.guppang.workRecord.dto.WorkRecordPost;
+import ruby.guppang.workRecord.enums.WorkPlaceMapper;
+import ruby.guppang.workRecord.enums.WorkPlaces;
+import ruby.guppang.workRecord.enums.WorkTimeMapper;
+import ruby.guppang.workRecord.enums.WorkTimes;
+import ruby.guppang.worker.Worker;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/workRecord")
+@RequestMapping("/api/workRecords")
 public class WorkRecordController {
 
+    private final WorkRecordService workRecordService;
+    private final WorkPlaces workPlaces;
+    private final WorkTimes workTimes;
+
     @PostMapping
-    public void postWorkRecord() {
-        // 근무 신청자, 신청 시간, 상태,
+    public void postWorkRecord(
+            @RequestBody WorkRecordPost workRecordPost,
+            @AuthenticationWorker Worker worker) {
+        // TODO - 시큐리티 설정으로 권한을 체크
+        workRecordService.addRecord(worker, workRecordPost);
+    }
+
+    @GetMapping("/workplaces")
+    public List<WorkPlaceMapper> getWorkPlaces() {
+        return workPlaces.getWorkPlaceMappers();
+    }
+
+    @GetMapping("/worktimes")
+    public List<WorkTimeMapper> getWorkTimes() {
+        return workTimes.getWorkTimeMappers();
     }
 }

@@ -1,4 +1,4 @@
-package ruby.guppang.worker.enums;
+package ruby.guppang.workRecord.enums;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;

@@ -3,25 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ruby.guppang.worker.WorkerMapper">
-    <insert id="insert" parameterType="ruby.guppang.worker.dto.WorkerSignUp">
+    <insert id="insert" parameterType="ruby.guppang.worker.Worker">
         INSERT INTO     WORKER
                         (
                             EMAIL,
                             NAME,
-                            PASSWORD
+                            PASSWORD,
+                            ROLE
                         )
         VALUES          (
                             #{email},
                             #{name},
-                            #{password}
+                            #{password},
+                            #{role}
                         );
     </insert>
 
+
+
+<!--    existsByEmail-->
+
     <select id="findByEmail" parameterType="String" resultType="ruby.guppang.worker.Worker">
-        SELECT          EMAIL,
+        SELECT          ID,
+                        EMAIL,
                         NAME,
                         PASSWORD,
                         ROLE
         FROM            WORKER
+        WHERE           EMAIL = #{email}
     </select>
 </mapper>

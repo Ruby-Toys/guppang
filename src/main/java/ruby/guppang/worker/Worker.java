@@ -2,17 +2,17 @@ package ruby.guppang.worker;
 
 import lombok.Builder;
 import lombok.Getter;
-import ruby.guppang.worker.enums.WorkerRole;
 
 @Getter
 public class Worker {
-    private String email;
-    private String name;
-    private String password;
-    private WorkerRole role;
+    private Long id;
+    private final String email;
+    private final String name;
+    private final String password;
+    private final String role;
 
     @Builder
-    public Worker(String email, String name, String password, WorkerRole role) {
+    public Worker(String email, String name, String password, String role) {
         this.email = email;
         this.name = name;
         this.password = password;
