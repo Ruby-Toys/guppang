@@ -9,15 +9,14 @@ import ruby.guppang.worker.Worker;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class WorkRecordServiceImpl implements WorkRecordService{
 
     private final WorkRecordMapper workRecordMapper;
 
 
     @Override
-    @Transactional
     public void addRecord(Worker worker, WorkRecordPost workRecordPost) {
-        // 근무 신청자, 신청 시간, 상태, 근무지
         WorkRecord workRecord = WorkRecord.builder()
                 .workerId(worker.getId())
                 .workTime(workRecordPost.workTimeCord())
@@ -26,5 +25,10 @@ public class WorkRecordServiceImpl implements WorkRecordService{
                 .build();
 
         workRecordMapper.insert(workRecord);
+    }
+
+    @Override
+    public void updateRecordState(Long id, String workState) {
+        workRecordMapper.updateWorkState(id, workState);
     }
 }

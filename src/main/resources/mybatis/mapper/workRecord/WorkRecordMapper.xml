@@ -18,4 +18,20 @@
                             #{workState}
                         );
     </insert>
+
+    <select id="existsByIdAndWorkerId" parameterType="map" resultType="boolean">
+        SELECT 			EXISTS  (
+                                    SELECT          ID
+                                    FROM            WORK_RECORD
+                                    WHERE           ID = #{id}
+                                    AND             WORKER_ID = #{workerId}
+                                )
+        FROM 			DUAL;
+    </select>
+
+    <update id="updateWorkState" parameterType="map">
+        UPDATE          WORK_RECORD
+        SET             WORK_STATE = #{workState}
+        WHERE           ID = #{id};
+    </update>
 </mapper>

@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ruby.guppang.worker.dto.WorkerSignUp;
-import ruby.guppang.worker.dto.WorkerUpdate;
 import ruby.guppang.worker.enums.WorkerRole;
 
 @Service
@@ -32,11 +31,6 @@ public class WorkerServiceImpl implements WorkerService {
     public boolean existsByEmail(String email) {
         Worker byEmail = workerMapper.findByEmail(email);
         return byEmail != null;
-    }
-
-    @Override
-    public void update(WorkerUpdate workerUpdate) {
-
     }
 
     @Override
