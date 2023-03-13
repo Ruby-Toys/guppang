@@ -1,3 +1,8 @@
 package ruby.guppang.workRecord.dto;
 
-public record WorkRecordPeriod(String start, String end) { }
+import ruby.guppang.common.valid.LocalDatePattern;
+
+public record WorkRecordPeriod(
+        @LocalDatePattern String start,
+        @LocalDatePattern String end
+) { }

@@ -1,5 +1,6 @@
 package ruby.guppang.worker;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class WorkerController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signUp")
-    public void signUp(@RequestBody WorkerSignUp workerSignUp) {
+    public void signUp(@RequestBody @Valid WorkerSignUp workerSignUp) {
         String email = workerSignUp.email();
         boolean existsByEmail = workerService.existsByEmail(email);
         if (existsByEmail) {

@@ -1,5 +1,6 @@
 package ruby.guppang.workRecord;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class WorkRecordController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void postWorkRecord(
-            @RequestBody WorkRecordPost workRecordPost,
+            @RequestBody @Valid WorkRecordPost workRecordPost,
             @AuthenticationWorker Worker worker) {
         workRecordService.addRecord(worker.getId(), workRecordPost);
     }
@@ -38,7 +39,7 @@ public class WorkRecordController {
     @PatchMapping("/{id}")
     public void patchWorkRecord(
             @PathVariable Long id,
-            @RequestBody WorkRecordPatch workRecordPatch,
+            @RequestBody @Valid WorkRecordPatch workRecordPatch,
             @AuthenticationWorker Worker worker) {
         Long workerId = worker.getId();
         boolean exists = workRecordMapper.existsByIdAndWorkerId(id, workerId);
@@ -52,7 +53,7 @@ public class WorkRecordController {
 
     @GetMapping
     public List<WorkRecordGet> getWorkRecords(
-            WorkRecordPeriod workRecordPeriod,
+            @Valid WorkRecordPeriod workRecordPeriod,
             @AuthenticationWorker Worker worker) {
         return workRecordService.getWorkRecordList(worker.getId(), workRecordPeriod);
     }

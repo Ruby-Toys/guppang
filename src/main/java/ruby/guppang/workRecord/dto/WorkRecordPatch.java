@@ -1,4 +1,7 @@
 package ruby.guppang.workRecord.dto;
 
-public record WorkRecordPatch (String workState) {
+import ruby.guppang.common.valid.WorkStatePattern;
+
+public record WorkRecordPatch (
+        @WorkStatePattern String workState) {
 }

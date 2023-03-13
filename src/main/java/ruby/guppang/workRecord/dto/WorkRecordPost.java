@@ -1,3 +1,11 @@
 package ruby.guppang.workRecord.dto;
 
-public record WorkRecordPost(String workTimeCord, String workPlaceCord, String workDate) {}
+import ruby.guppang.common.valid.LocalDatePattern;
+import ruby.guppang.common.valid.WorkPlacePattern;
+import ruby.guppang.common.valid.WorkTimePattern;
+
+public record WorkRecordPost(
+        @WorkTimePattern String workTimeCord,
+        @WorkPlacePattern String workPlaceCord,
+        @LocalDatePattern String workDate
+) {}
