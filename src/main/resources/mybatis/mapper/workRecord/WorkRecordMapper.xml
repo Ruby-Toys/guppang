@@ -9,13 +9,15 @@
                             WORKER_ID,
                             WORK_TIME,
                             WORK_PLACE,
-                            WORK_STATE
+                            WORK_STATE,
+                            WORK_DATE
                         )
         VALUES          (
                             #{workerId},
                             #{workTime},
                             #{workPlace},
-                            #{workState}
+                            #{workState},
+                            #{workDate}
                         );
     </insert>
 
@@ -27,6 +29,18 @@
                                     AND             WORKER_ID = #{workerId}
                                 )
         FROM 			DUAL;
+    </select>
+
+    <select id="findByWorkerAndPeriod" parameterType="map" resultType="ruby.guppang.workRecord.dto.WorkRecordGet">
+        SELECT          ID AS id,
+                        WORK_TIME AS workTime,
+                        WORK_PLACE AS workPlace,
+                        WORK_STATE AS workState,
+                        WORK_DATE AS workDate
+        FROM 			WORK_RECORD
+        WHERE           WORKER_ID = #{workerId}
+        AND             WORK_DATE BETWEEN #{period.start} AND #{period.end}
+        ORDER BY        ID DESC;
     </select>
 
     <update id="updateWorkState" parameterType="map">

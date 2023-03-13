@@ -1,11 +1,13 @@
 package ruby.guppang.workRecord;
 
-import ruby.guppang.workRecord.dto.WorkRecordPatch;
+import ruby.guppang.workRecord.dto.WorkRecordGet;
+import ruby.guppang.workRecord.dto.WorkRecordPeriod;
 import ruby.guppang.workRecord.dto.WorkRecordPost;
-import ruby.guppang.worker.Worker;
+
+import java.util.List;
 
 public interface WorkRecordService {
-    void addRecord(Worker worker, WorkRecordPost workRecordPost);
-
+    void addRecord(Long workerId, WorkRecordPost workRecordPost);
     void updateRecordState(Long id, String workState);
+    List<WorkRecordGet> getWorkRecordList(Long workerId, WorkRecordPeriod workRecordPeriod);
 }

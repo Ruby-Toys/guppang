@@ -1,6 +1,7 @@
 package ruby.guppang.worker;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ruby.guppang.security.AuthenticationWorker;
 import ruby.guppang.worker.dto.WorkerInfo;
@@ -15,6 +16,7 @@ public class WorkerController {
     private final WorkerMapper workerMapper;
     private final WorkerService workerService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signUp")
     public void signUp(@RequestBody WorkerSignUp workerSignUp) {
         String email = workerSignUp.email();

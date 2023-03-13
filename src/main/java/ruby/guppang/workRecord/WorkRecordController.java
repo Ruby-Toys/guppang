@@ -1,9 +1,12 @@
 package ruby.guppang.workRecord;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ruby.guppang.security.AuthenticationWorker;
+import ruby.guppang.workRecord.dto.WorkRecordGet;
 import ruby.guppang.workRecord.dto.WorkRecordPatch;
+import ruby.guppang.workRecord.dto.WorkRecordPeriod;
 import ruby.guppang.workRecord.dto.WorkRecordPost;
 import ruby.guppang.workRecord.enums.WorkPlaceMapper;
 import ruby.guppang.workRecord.enums.WorkPlaces;
@@ -24,12 +27,12 @@ public class WorkRecordController {
     private final WorkPlaces workPlaces;
     private final WorkTimes workTimes;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void postWorkRecord(
             @RequestBody WorkRecordPost workRecordPost,
             @AuthenticationWorker Worker worker) {
-        // TODO - 시큐리티 설정으로 권한을 체크
-        workRecordService.addRecord(worker, workRecordPost);
+        workRecordService.addRecord(worker.getId(), workRecordPost);
     }
 
     @PatchMapping("/{id}")
@@ -45,6 +48,13 @@ public class WorkRecordController {
         }
 
         workRecordService.updateRecordState(id, workRecordPatch.workState());
+    }
+
+    @GetMapping
+    public List<WorkRecordGet> getWorkRecords(
+            WorkRecordPeriod workRecordPeriod,
+            @AuthenticationWorker Worker worker) {
+        return workRecordService.getWorkRecordList(worker.getId(), workRecordPeriod);
     }
 
     @GetMapping("/workplaces")

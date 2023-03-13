@@ -1,3 +1,3 @@
 package ruby.guppang.workRecord.dto;
 
-public record WorkRecordPost(String workTimeCord, String workPlaceCord) {}
+public record WorkRecordPost(String workTimeCord, String workPlaceCord, String workDate) {}
